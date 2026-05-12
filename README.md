@@ -18,6 +18,22 @@ Run this command in your terminal to add the latest version of `Octocrab`.
 cargo add octocrab
 ```
 
+### WebAssembly
+For `wasm32-unknown-unknown` browser targets, disable the default client:
+
+```toml
+octocrab = { version = "0.50", default-features = false, features = [
+    "jwt-rust-crypto",
+] }
+```
+
+Then construct Octocrab with the normal builder. On `wasm32` targets, Octocrab
+uses a browser-compatible service automatically:
+
+```rust
+let octocrab = octocrab::Octocrab::builder().build()?;
+```
+
 ## Semantic API
 The semantic API provides strong typing around GitHub's API, a set of
 [`models`] that maps to GitHub's types, and [`auth`] functions that are useful
